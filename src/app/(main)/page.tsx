@@ -6,7 +6,7 @@ export default function HomePage() {
       </div>
 
       <div className="video-grid">
-        {Array.from({ length: 12 }).map((_, i) => {
+        {Array.from({ length: 10 }).map((_, i) => {
           return (
             <div className="vide-card" key={i}>
               <div className="video-card__thumbnail">
