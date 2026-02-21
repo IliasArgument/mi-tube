@@ -21,7 +21,7 @@ const mainNavItems = [
 ];
 
 const libraryItems = [
-  { href: '/history', icon: HiClock, label: 'History', auth: true },
+  { href: '/history', icon: HiClock, label: 'History', auth: true }, 
   { href: '/liked', icon: HiHeart, label: 'Liked videos', auth: true },
 ];
 
