@@ -1,33 +1,28 @@
-'use client';
-import Link from 'next/link';
-import { HiClock, HiCog, HiCollection, HiHeart, HiHome } from 'react-icons/hi';
-import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
-import Avatar from '../../ui/avatar/avatar';
-import { useMyChannels } from '@/modules/channels/hooks/use-channels';
+'use client'
+import Link from 'next/link'
+import { HiClock, HiCog, HiCollection, HiHeart, HiHome } from 'react-icons/hi'
+import { useMyChannels } from '@/modules/channels/hooks/use-channels'
+import Avatar from '../../ui/avatar/Avatar'
+import clsx from 'clsx'
+import { usePathname } from 'next/navigation'
 
 interface SidebarProps {
-  isCollapsed: boolean;
+  isCollapsed: boolean
 }
 
 const mainNavItems = [
   { href: '/', icon: HiHome, label: 'Home' },
-  {
-    href: '/subscriptions',
-    icon: HiCollection,
-    label: 'Subscriptions',
-    auth: true,
-  },
-];
+  { href: '/subscriptions', icon: HiCollection, label: 'Subscriptions', auth: true },
+]
 
 const libraryItems = [
-  { href: '/history', icon: HiClock, label: 'History', auth: true }, 
+  { href: '/history', icon: HiClock, label: 'History', auth: true },
   { href: '/liked', icon: HiHeart, label: 'Liked videos', auth: true },
-];
+]
 
 export function Sidebar({ isCollapsed }: SidebarProps) {
-  const pathname = usePathname();
-  const { data: channels } = useMyChannels();
+  const pathname = usePathname()
+  const { data: channels } = useMyChannels()
 
   return (
     <aside
@@ -39,9 +34,9 @@ export function Sidebar({ isCollapsed }: SidebarProps) {
         <nav className="sidebar__section">
           <div className="sidebar__nav">
             {mainNavItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname === item.href
 
-              const Icon = item.icon;
+              const Icon = item.icon
               return (
                 <Link
                   href={item.href}
@@ -53,7 +48,7 @@ export function Sidebar({ isCollapsed }: SidebarProps) {
                   <Icon className="sidebar__item-icon" />
                   <span className="sidebar__item-text">{item.label}</span>
                 </Link>
-              );
+              )
             })}
           </div>
         </nav>
@@ -62,9 +57,9 @@ export function Sidebar({ isCollapsed }: SidebarProps) {
           <h3 className="sidebar__section-title">Library</h3>
           <div className="sidebar__nav">
             {libraryItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname === item.href
 
-              const Icon = item.icon;
+              const Icon = item.icon
 
               return (
                 <Link
@@ -77,7 +72,7 @@ export function Sidebar({ isCollapsed }: SidebarProps) {
                   <Icon className="sidebar__item-icon" />
                   <span className="sidebar__item-text">{item.label}</span>
                 </Link>
-              );
+              )
             })}
           </div>
         </nav>
@@ -88,7 +83,7 @@ export function Sidebar({ isCollapsed }: SidebarProps) {
             </div>
             <div className="sidebar__nav">
               {channels.slice(0, 5).map((channel, ind) => {
-                const isActive = pathname === `/channel/${channel.handle}`;
+                const isActive = pathname === `/channel/${channel.handle}`
 
                 return (
                   <Link
@@ -107,7 +102,7 @@ export function Sidebar({ isCollapsed }: SidebarProps) {
                       {channel.owner.name || channel.handle}
                     </span>
                   </Link>
-                );
+                )
               })}
             </div>
           </nav>
@@ -128,5 +123,5 @@ export function Sidebar({ isCollapsed }: SidebarProps) {
         </nav>
       </div>
     </aside>
-  );
+  )
 }

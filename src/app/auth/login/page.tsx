@@ -1,18 +1,21 @@
-'use client';
+'use client'
 
-import { useForm } from 'react-hook-form';
-
-import Link from 'next/link';
-import { FaPlay } from 'react-icons/fa';
-import Input from '@/common/components/ui/input/Input';
-import Button from '@/common/components/ui/button/Button';
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import Link from 'next/link'
+import { FaPlay } from 'react-icons/fa'
+import Input from '@/common/components/ui/input/Input'
+import Button from '@/common/components/ui/button/Button'
+import { useLogin } from '@/modules/auth/hooks/use-auth'
 
 interface LoginFormData {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 export default function LoginPage() {
+  const { login, isLoading } = useLogin()
+  const [error, setError] = useState<string | null>(null)
   const {
     register,
     handleSubmit,
@@ -22,11 +25,16 @@ export default function LoginPage() {
       email: 'demo@example.com',
       password: 'password123',
     },
-  });
+  })
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log('Login form submitted:', data);
-  };
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      setError(null)
+      await login(data)
+    } catch (err) {
+      setError('Login failed. Please check your credentials.')
+    }
+  }
 
   return (
     <div className="auth-card">
@@ -40,6 +48,12 @@ export default function LoginPage() {
       </div>
 
       <form className="auth-card__form" onSubmit={handleSubmit(onSubmit)}>
+        {error && (
+          <div className="auth-card__error">
+            {error}
+          </div>
+        )}
+
         <Input
           label="Email"
           type="email"
@@ -58,7 +72,7 @@ export default function LoginPage() {
           error={errors.password?.message}
         />
 
-        <Button type="submit" variant="primary" fullWidth>
+        <Button type="submit" variant="primary" fullWidth disabled={isLoading}>
           Sign In
         </Button>
       </form>
@@ -67,5 +81,5 @@ export default function LoginPage() {
         Don&apos;t have an account? <Link href="/auth/register">Sign up</Link>
       </div>
     </div>
-  );
+  )
 }
