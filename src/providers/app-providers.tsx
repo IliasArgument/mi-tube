@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import { AuthProvider } from '@/modules/auth/context/context'
-import React from 'react'
-import { Toaster } from 'react-hot-toast'
-import { QueryProvider } from './query-provider' 
+import { AuthProvider } from '@/modules/auth/context/context';
+import React from 'react';
+import { Toaster } from 'react-hot-toast';
+import { QueryProvider } from './query-provider';
 
 interface AppProvidersProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function AppProviders({ children }: AppProvidersProps) {
@@ -38,5 +38,5 @@ export function AppProviders({ children }: AppProvidersProps) {
         />
       </AuthProvider>
     </QueryProvider>
-  )
+  );
 }
