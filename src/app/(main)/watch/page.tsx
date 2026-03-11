@@ -5,7 +5,7 @@ import { HiOutlineHeart } from 'react-icons/hi'
 export default function WatchPage() {
   return (
     <div className="watch-page">
-      <div className="watch-page__main">
+       <div className="watch-page__main">
         <div className="video-player">
           <div className="video-player__placeholder">Video ID: {0 || 'No video selected'}</div>
         </div>
